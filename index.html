@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Typescript presentation</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+	<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Typescript</h1>
+				<p>presentation by <a href="https://github.com/maximzmei">Maxim Rynkov</a></p>
+			</section>
+			<section>
+				<ul>
+					<li>INTRO</li>
+					<li>ISTALLATION PROCESS</li>
+					<li>TYPESCRIPT SYNTAX</li>
+					<li>DO’S AND DON’TS</li>
+					<li>CONCLUSION</li>
+				</ul>
+			</section>
+			<section>
+				<h4 style="color: #42AFFA;">RECENT RISE OF TS’s POPULARITY, DATA FROM GOOGLE TRENDS.</h4>
+				<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/2431_RC04/embed_loader.js">
+				</script>
+				<script type="text/javascript">
+					trends.embed.renderExploreWidget("TIMESERIES", {
+						"comparisonItem": [{
+							"keyword": "/m/0n50hxv",
+							"geo": "",
+							"time": "today 5-y"
+						}],
+						"category": 31,
+						"property": ""
+					}, {
+						"exploreQuery": "cat=31&date=today%205-y&q=%2Fm%2F0n50hxv",
+						"guestPath": "https://trends.google.com:443/trends/embed/"
+					});
+				</script>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">TYPESCRIPT FACTS</h3>
+				<ul>
+					<li>Large and scale application development</li>
+					<li>Language, not a framework</li>
+					<li>Cross-compiles to JavaScript</li>
+					<li>Produces idiomatic JavaScript</li>
+					<li>Doesn’t try to replace JavaScript</li>
+					<li>Offers missing language features(Anticipates ES6, …)</li>
+					<li>Is a superset of JavaScript (Promises easy migration of JS code)</li>
+					<li>JS libs be used easy</li>
+					<li>(Optional) Static typing</li>
+				</ul>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">INSTALLING TYPESCRIPT</h3>
+				<p>There are two main ways to get the TypeScript tools:</p>
+				<ul>
+					<li>Via npm (the Node.js package manager) / yarn add typescript.</li>
+					<li>By installing TypeScript’s Visual Studio Plugins.</li>
+				</ul>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">Text Editors with TS support.</h3>
+				<p>TypeScript is an open source project but is developed and maintained by Microsoft and as such was
+					originally supported only in Microsoft’s Visual Studio platform. Nowadays, there are a lot more text
+					editors and IDEs that either natively or through plugins offer support for the TypeScript syntax,
+					auto-complete suggestions, error catching, and built-in compilers.</p>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">COMPILING PROCESS</h3>
+				<p>Compiling to JavaScript TypeScript is written in .ts files (ir .tsx for JSX), which can’t be used
+					directly in the browser and need to be translated/converted to vanilla .js first.</p>
+				<p>This compilation process can be done in a number of different ways:</p>
+				<ul>
+					<li>In the terminal using the command line tool tsc.</li>
+					<li>Directly in Visual Studio or some of the other IDEs and text editors.</li>
+					<li>Using automated task runners such as grunt, gulp.</li>
+				</ul>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">COMPILING TO JS</h3>
+				<p>The following command takes a TypeScript file named main.ts and translates it into its JavaScript
+					version main.js. If main.js already exists it will be overwritten.</p>
+				<ul>
+					<li style="color: #42AFFA;">tsc main.ts</li>
+					<li>We can also compile multiple files simultaneously by listing all of them or by applying
+						wildcards:</li>
+					<li># Will result in separate .js files: ,ain.js worker.js</li>
+					<li style="color: #42AFFA;">tsc main.ts worker.ts</li>
+					<li># Compiles all .ts files in the current folder. Does NOT work recursively.</li>
+				</ul>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">TYPESCRIPT SYNTAX</h3>
+				<pre><code data-trim data-noescape>
+					var num: number = 42;
+				</code></pre>
+				<ul class="fragment fade-in">
+					<li>Declare it</li>
+					<li>Name it</li>
+					<li>Annotate it</li>
+					<li>Type it</li>
+					<li>Set it</li>
+				</ul>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">TYPESCRIPT SYNTAX – CLASSES</h3>
+				<pre><code data-trim data-noescape>
+					class Animal {
+						move(distanceInMeters: number = 0) {
+						  console.log(`Animal moved ${distanceInMeters}m.`);
+						}
+					  }
+					class Dog extends Animal {
+						bark() {
+						  console.log("Woof! Woof!");
+						}
+					  }
+					const dog = new Dog();
+					dog.move(10);
+					dog.bark();
+				</code></pre>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">TYPESCRIPT SYNTAX – INTERFACES</h3>
+				<pre><code data-trim data-noescape>
+					interface ClockInterface {
+						currentTime: Date;
+						setTime:(d: Date);
+					}
+
+					class Clock implements ClockInterface {
+						currentTime: Date;
+						setTime:(d: Date) {
+							this.currentTime = d;
+						}
+
+						constructor(h: number, m: number) { }
+					}
+					  </code></pre>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">TYPESCRIPT SYNTAX – GENERICS</h3>
+				<pre><code data-trim data-noescape>
+					funtion identify<T>(arg: T): T {
+						return arg;	
+					}
+
+					let output = identify<string>("myString");
+					// type of output will be 'string'
+					  </code></pre>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">DO’S AND DON’TS | GENERAL TYPES</h3>
+				<p>Don’t ever use the types Number, String, Boolean or Object. These types refer to non-primitive boxed
+					objects that are almost never used appropriately in JavaScript code.</p>
+				<pre><code data-trim data-noescape>
+						// WRONG
+						funtion reverse(s: String): String;
+						  </code></pre>
+				<pre><code data-trim data-noescape>
+							// OK
+							funtion reverse(s: string): string;
+							  </code></pre>
+			</section>
+			<section>
+				<section>
+					<h3 style="color: #42AFFA;">DO’S AND DON’TS | CALLBACK TYPES</h3>
+					<p>Don’t use the return type any for callbacks whose value will be ignored:</p>
+					<pre><code data-trim data-noescape>
+						// WRONG
+						funtion fn(x: () => any) {
+							x();
+						}
+						  </code></pre>
+					<pre><code data-trim data-noescape>
+							// OK
+							funtion fn(x: () => void) {
+								x();
+							}
+							  </code></pre>
+				</section>
+				<section>
+					<h3 style="color: #42AFFA;">DO’S AND DON’TS | CALLBACK TYPES</h3>
+					<p>Example:</p>
+					<pre><code data-trim data-noescape>
+						// WRONG
+						funtion fn(x: () => void) {
+							var k = x(); // oops! meant to do smth else
+							k.doSomething(); // error, but would be OK if the return type had been 'any'
+						}
+						  </code></pre>
+					<p>Why: Using void is safer because it prevents you from accidently using the return value of x in
+						an
+						unchecked way</p>
+				</section>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">DO’S AND DON’TS | OVERLOADS AND CALLBACKS</h3>
+				<p>Don’t write separate overloads that differ only callback arity -> Do write a single overload using
+					the maximum arity:</p>
+				<pre><code data-trim data-noescape>
+						// WRONG
+						declare function beforeAll(action: () => void, timeout?: number): void;
+						  </code></pre>
+				<pre><code data-trim data-noescape>
+							// OK
+							declare function beforeAll(action: (done: Donefn) => void, timeout?: number): void;
+							  </code></pre>
+			</section>
+			<section>
+				<section>
+					<h3 style="color: #42AFFA;">DO’S AND DON’TS | FUNCTION OVERLOADS</h3>
+					<p>Don’t put more general overloads before more specific overloads, Do sort overloads by putting the
+						more
+						general signatures after more specific signatures:</p>
+					<pre><code data-trim data-noescape>
+							// WRONG
+							declare function fn(x: any): any;
+							declare function fn(x: HTMLElement): number;
+							declare function fn(x: HTMLDivElement): string;
+
+							var myElem: HTMLDivElement;
+							var x = fn(myElem); // x: any
+							  </code></pre>
+				</section>
+				<section>
+					<h3 style="color: #42AFFA;">DO’S AND DON’TS | FUNCTION OVERLOADS</h3>
+					<pre><code data-trim data-noescape>
+						// OK
+						declare function fn(x: HTMLDivElement): string;
+						declare function fn(x: HTMLElement): number;
+						declare function fn(x: any): any;
+
+						var myElem: HTMLDivElement;
+						var x = fn(myElem); // x: string
+						  </code></pre>
+					<p>Why: TypeScript chooses the first matching overload when resolving function calls. When an
+						earlier
+						overload is “more general” than a later one, the later one is effectively hidden and cannot
+						called.
+					</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3 style="color: #42AFFA;">DO’S AND DONTS | USE OPTIONAL PARAMETERS</h3>
+					<p>Don’t write several overloads that differ only in trailing parameters. Do use optional parameters
+						whenever possible:</p>
+					<pre><code data-trim data-noescape>
+							// WRONG
+							inteface Example {
+								diff(one: string): number;
+								diff(one: string, two: string): number;
+								diff(b: string, two: string, three: boolean): number;
+							}
+							  </code></pre>
+				</section>
+				<section>
+					<h3 style="color: #42AFFA;">DO’S AND DON'TS | USE OPTIONAL PARAMETERS</h3>
+					<pre><code data-trim data-noescape>
+						// OK
+						inteface Moment {
+							diff(b: string, two?: string, three?: boolean): number;
+						}
+							  </code></pre>
+					<p>Why: TypeScript chooses the first matching overload when resolving function calls. When an
+						earlier
+						overload is “more general” than a later one, the later one is effectively hidden and cannot
+						called.
+					</p>
+				</section>
+			</section>
+			<section>
+				<h4 style="color: #42AFFA;">DO’S AND DON’TS | USE UNION TYPES</h4>
+				<p>Don’t write overloads that differ by type in only one argument position. Do use union types whenever
+					possible:
+				</p>
+				<pre><code data-trim data-noescape>
+					// WRONG
+					inteface Moment {
+						utcOffSet(): number;
+						utcOffSet(b: number): Moment;
+						utcOffSet(b: string): Moment;
+					}
+					  </code></pre>
+				<pre><code data-trim data-noescape>
+					// OK
+					inteface Moment {
+						utcOffSet(): number;
+						utcOffSet(b: number|string): Moment;
+					}
+						  </code></pre>
+				<p>Note that we didn’t make b optional here because the return types of the signatures differ.</p>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">MIGRATING FROM JAVASCRIPT</h3>
+				<ol>
+					<li>Setting up your Directories</li>
+					<li>Writing a Configuration file</li>
+					<li>Integrating with Build tools(Gulp, Webpack)</li>
+				</ol>
+			</section>
+			<section>
+				<h3 style="color: #42AFFA;">CONCLUSION</h3>
+				<p style="color: #42AFFA;">PROS:</p>
+				<ol>
+					<li>High value, low cost improvement over JavaScript</li>
+					<li>Safe and more popular</li>
+					<li>Solid path to ES6</li>
+				</ol>
+				<p style="color: #42AFFA;">CONS:</p>
+				<ol>
+					<li>Still need to know JS quirks and features</li>
+					<li>Current compiler slowish(Faster one is in development)</li>
+				</ol>
+			</section>
+			<section>
+				<h1 style="color: #42AFFA;">Thanks for watching</h1>
+			</section>
+		</div>
+	</div>
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			slideNumber: true,
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
